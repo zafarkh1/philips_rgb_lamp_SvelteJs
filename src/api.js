@@ -94,18 +94,22 @@ export async function updateLamp(id, data) {
 export async function createLamp(data) {
   return new Promise((resolve) => {
     setTimeout(() => {
+      const maxId = lamps.reduce((max, lamp) => Math.max(max, lamp.id), 0);
       const newLamp = {
-        id: lamps.length + 1,
+        id: maxId + 1,
         ...data
-      }
-      lamps.push(newLamp)
+      };
+      // lamps.push(newLamp);
       resolve(newLamp);
-    }, 500)
-  })
+    }, 500);
+  });
 }
+
 
 export async function deleteLamp(id) {
   return new Promise((resolve, reject) => {
+    console.log(id)
+    console.log(lamps)
     setTimeout(() => {
       const index = lamps.findIndex((lamp) => lamp.id === id);
       if (index !== -1) {
